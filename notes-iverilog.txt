@@ -1,0 +1,13 @@
+01/08/21
+http://homepages.cae.wisc.edu/~hu/ece552/verilog/Icarus%20Verilog%20quick%20start.pdf
+
+iverilog -o sim-ex.vvp simple_tb.v simple.v
+
+creates sim-ex.vvp
+
+vvp sim-ex.vvp
+VCD info: dumpfile simple.vcd opened for output.
+	A is 1010, B is 0011.
+	A is 1100, B is 0101.
+
+gtkwave simple.vcd
