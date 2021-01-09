@@ -41,8 +41,8 @@ obj_dir/Vthruwire__ALL.a: obj_dir/Vthruwire.cpp
 # Build a simulation
 thruwire: thruwire.cpp obj_dir/Vthruwire__ALL.a
 	@echo "Building a Verilator-based simulation of thruwire"
-	g++ -I/usr/share/verilator/include  -I obj_dir     \
-		/usr/share/verilator/include/verilated.cpp \
+	g++ -I/usr/local/share/verilator/include  -I obj_dir     \
+		/usr/local/share/verilator/include/verilated.cpp \
 		thruwire.cpp obj_dir/Vthruwire__ALL.a      \
 		-o thruwire
 
