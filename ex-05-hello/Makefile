@@ -39,7 +39,8 @@ SIMFILE := $(SIMPROG).cpp
 VDIRFB  := ./obj_dir
 COSIMS  := uartsim.cpp
 all: $(VCDFILE)
-
+obj_dir/Vhelloworld__ALL.a: obj_dir/helloworld_tb.cpp
+	make -C obj_dir -f Vthruwire.mk
 GCC := g++
 CFLAGS = -g -Wall -I$(VINC) -I $(VDIRFB)
 #

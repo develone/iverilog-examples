@@ -42,7 +42,8 @@ int	main(int argc, char **argv) {
 		= new TESTB<Vhelloworld>;
 	UARTSIM		*uart;
 	unsigned	baudclocks;
-
+	Verilated::traceEverOn(true);    // Verilator must compute traced signals
+    VL_PRINTF("Enabling waves...\n");
 
 	uart = new UARTSIM();
 	baudclocks = tb->m_core->o_setup;
