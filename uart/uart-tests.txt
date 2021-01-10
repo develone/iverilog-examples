@@ -1,0 +1,13 @@
+iverilog -o echotest.vvp echotest.v echotest_tb.v
+vvp echotest.vvp
+still needs work.
+
+
+iverilog -o helloworld.vvp helloworld.v helloworld_tb.v
+vvp helloworld.vvp
+
+iverilog -o speechfifo.vvp speechfifo.v speechfifo_tb.v
+vvp speechfifo.vvp
+
+iverilog -o uart_tb.vvp uart_rx.v uart_tx.v uart_tb.v
+vvp uart_tb.vvp
