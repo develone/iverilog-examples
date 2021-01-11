@@ -1,0 +1,64 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Tue Jan  8 23:01:32 2019
+[*]
+[dumpfile] "(null)"
+[savefile] "/home/dan/work/rnd/opencores/lessons/ex-09-serialrx/rxuart.gtkw"
+[timestart] 0
+[size] 1729 600
+[pos] -1 -1
+*-4.696020 50 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] rxuart.
+[sst_width] 196
+[signals_width] 174
+[sst_expanded] 1
+[sst_vpaned_height] 155
+@28
+rxuart.f_past_valid
+rxuart.i_clk
+@200
+-
+@28
+[color] 2
+rxuart.i_uart_rx
+[color] 2
+rxuart.o_wr
+@22
+[color] 2
+rxuart.o_data[7:0]
+@200
+-
+@28
+rxuart.ck_uart
+@200
+-
+@22
+rxuart.baud_counter[15:0]
+@28
+rxuart.zero_baud_counter
+@22
+rxuart.state[3:0]
+@200
+-
+@29
+[color] 3
+rxuart.f_tx_iwr
+@23
+[color] 3
+rxuart.f_tx_idata[7:0]
+@29
+[color] 3
+rxuart.f_tx_uart
+[color] 3
+rxuart.f_tx_busy
+@200
+-
+@22
+rxuart.f_tx_counter[10:0]
+rxuart.f_txdata[7:0]
+@28
+rxuart.q_uart
+@24
+rxuart.tx.counter[23:0]
+[pattern_trace] 1
+[pattern_trace] 0

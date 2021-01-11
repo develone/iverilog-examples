@@ -1,0 +1,22 @@
+[tasks]
+cvr
+prf
+
+[options]
+prf: mode prove
+cvr: mode cover
+cvr: depth 192
+prf: depth   4
+
+[engines]
+smtbmc
+
+[script]
+read -formal f_txuart.v
+read -formal rxuart.v
+cvr: hierarchy -top rxuart -chparam CLOCKS_PER_BAUD 8
+prep -top rxuart
+
+[files]
+f_txuart.v
+rxuart.v
