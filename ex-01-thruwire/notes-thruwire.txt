@@ -1,41 +1,28 @@
-yosys -l simple.log -p 'synth_ice40 -abc9 -blif thruwire.blif -json thruwire.json' thruwire.v
+recheck 01/12/21 
 diff thruwire.pcf ~/07118catzip/rtl/uart/noflowcntl/echotest.pcf
 0a1
 >  
 3,5c4,6
 < #set_io clk C8 
-< set_io o_led B3 
-< set_io i_sw B5
+< set_io o_led B5 
+< set_io i_sw B3
 ---
 > set_io i_clk C8 
 > set_io i_uart_rx B5 
 > set_io o_uart_tx B3
+echotest wks
 
-# pin definitions 
-This appears to be A not B since it is on the top not the bottom
+U4B
+ICE40-HX8K-CT256				echotest										PMODUSB
+PM2-A2 IOT-223 B3 output wire	o_uart_tx B3 with respect to module --> to uart rx	2 
+PM2-A3 IOT-214 B5 input  i_uart_rx B5 with respect to module	<-- from the uart tx 3 
+																				PMODUSB
 
-testbuilds/catzip/rtl/uart/speechfifo.pcf
+thruwire
+PM2-A2 IOT-223 B3 input	wire	i_sw B3 with respect to module --> input to fpga
+PM2-A3 IOT-214 B5 output wire	o_led B5 with respect to module <-- output from fpga
 
-# pin definitions
-
-#       654321      
-#       xxxxxx  PMOD2 A
-#       xxxxxx  PMOD2 B
-#       654321
-#
-#PMOD2 A 
-set_io i_clk C8                 #IOT_197 USER_CLK
-set_io o_ledg[0] A9             #IOT_194 LED1
-set_io o_ledg[1] B8             #IOT_203 LED2
-set_io o_ledr    B7             #IOT_207 LED4
-
-set_io i_rts A1                 #IOT_220 PM2-A1 i_rts
-set_io i_uart_rx B5             #IOT_214 PM2-A3
-set_io o_uart_tx B3             #IOT_223 PM2-A2
-set_io o_cts B6                 #IOT_208 PM2-A4 o_cts
-#set_io clk C8 
-set_io o_led B3 <-- 
-set_io i_sw B5   -->
+yosys -l simple.log -p 'synth_ice40 -abc9 -blif thruwire.blif -json thruwire.json' thruwire.v
 === thruwire ===
 
    Number of wires:                  2
@@ -50,128 +37,7 @@ set_io i_sw B5   -->
 
 nextpnr-ice40 --hx8k --pcf thruwire.pcf --json thruwire.json --asc thruwire.asc
 
-Warning: Use of default value for --package is deprecated. Please add '--package ct256' to arguments.
-Info: constrained 'o_led' to bel 'X3/Y33/io0'
-Info: constrained 'i_sw' to bel 'X7/Y33/io1'
-
-Info: Packing constants..
-Info: Packing IOs..
-Info: Packing LUT-FFs..
-Info:        0 LCs used as LUT4 only
-Info:        0 LCs used as LUT4 and DFF
-Info: Packing non-LUT FFs..
-Info:        0 LCs used as DFF only
-Info: Packing carries..
-Info:        0 LCs used as CARRY only
-Info: Packing RAMs..
-Info: Placing PLLs..
-Info: Packing special functions..
-Info: Promoting globals..
-Info: Constraining chains...
-Info:        0 LCs used to legalise carry chains.
-Info: Checksum: 0x11302817
-
-Info: Annotating ports with timing budgets for target frequency 12.00 MHz
-Info: Checksum: 0x54e47d6a
-
-Info: Device utilisation:
-Info: 	         ICESTORM_LC:     1/ 7680     0%
-Info: 	        ICESTORM_RAM:     0/   32     0%
-Info: 	               SB_IO:     2/  256     0%
-Info: 	               SB_GB:     0/    8     0%
-Info: 	        ICESTORM_PLL:     0/    2     0%
-Info: 	         SB_WARMBOOT:     0/    1     0%
-
-Info: Placed 2 cells based on constraints.
-Info: Creating initial analytic placement for 0 cells, random placement wirelen = 4.
-Info:     at initial placer iter 0, wirelen = 4
-Info:     at initial placer iter 1, wirelen = 4
-Info:     at initial placer iter 2, wirelen = 4
-Info:     at initial placer iter 3, wirelen = 4
-Info: Running main analytical placer.
-Info: HeAP Placer Time: 0.01s
-Info:   of which solving equations: 0.00s
-Info:   of which spreading cells: 0.00s
-Info:   of which strict legalisation: 0.00s
-
-Info: Running simulated annealing placer for refinement.
-Info:   at iteration #1: temp = 0.000000, timing cost = 0, wirelen = 4
-Info:   at iteration #2: temp = 0.000000, timing cost = 0, wirelen = 4 
-Info: SA placement time 0.00s
-Warning: No clocks found in design
-
-Info: Max delay <async> -> <async>: 1.28 ns
-
-Info: Slack histogram:
-Info:  legend: * represents 1 endpoint(s)
-Info:          + represents [1,1) endpoint(s)
-Info: [ 82053,  82054) |* 
-Info: [ 82054,  82055) | 
-Info: [ 82055,  82056) | 
-Info: [ 82056,  82057) | 
-Info: [ 82057,  82058) | 
-Info: [ 82058,  82059) | 
-Info: [ 82059,  82060) | 
-Info: [ 82060,  82061) | 
-Info: [ 82061,  82062) | 
-Info: [ 82062,  82063) | 
-Info: [ 82063,  82064) | 
-Info: [ 82064,  82065) | 
-Info: [ 82065,  82066) | 
-Info: [ 82066,  82067) | 
-Info: [ 82067,  82068) | 
-Info: [ 82068,  82069) | 
-Info: [ 82069,  82070) | 
-Info: [ 82070,  82071) | 
-Info: [ 82071,  82072) | 
-Info: [ 82072,  82073) | 
-Info: Checksum: 0x6aab4b0e
-
-Info: Routing..
-Info: Setting up routing queue.
-Info: Routing 1 arcs.
-Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
-Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:          1 |        0          1 |    0     1 |         0|       0.00       0.00|
-Info: Routing complete.
-Info: Route time 0.00s
-Info: Checksum: 0xb0766df5
-Warning: No clocks found in design
-
-Info: Critical path report for cross-domain path '<async>' -> '<async>':
-Info: curr total
-Info:  0.0  0.0  Source i_sw$sb_io.D_IN_0
-Info:  1.3  1.3    Net o_led$SB_IO_OUT budget 83.333000 ns (7,33) -> (3,33)
-Info:                Sink o_led$sb_io.D_OUT_0
-Info: 0.0 ns logic, 1.3 ns routing
-
-Info: Max delay <async> -> <async>: 1.28 ns
-
-Info: Slack histogram:
-Info:  legend: * represents 1 endpoint(s)
-Info:          + represents [1,1) endpoint(s)
-Info: [ 82052,  82053) |* 
-Info: [ 82053,  82054) | 
-Info: [ 82054,  82055) | 
-Info: [ 82055,  82056) | 
-Info: [ 82056,  82057) | 
-Info: [ 82057,  82058) | 
-Info: [ 82058,  82059) | 
-Info: [ 82059,  82060) | 
-Info: [ 82060,  82061) | 
-Info: [ 82061,  82062) | 
-Info: [ 82062,  82063) | 
-Info: [ 82063,  82064) | 
-Info: [ 82064,  82065) | 
-Info: [ 82065,  82066) | 
-Info: [ 82066,  82067) | 
-Info: [ 82067,  82068) | 
-Info: [ 82068,  82069) | 
-Info: [ 82069,  82070) | 
-Info: [ 82070,  82071) | 
-Info: [ 82071,  82072) | 
-3 warnings, 0 errors
-
+ 
 icepack thruwire.asc thruwire.bin
 
 icetime -d hx8k -c 100 thruwire.asc

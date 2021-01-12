@@ -1,0 +1,5 @@
+# pin definitions 
+ 
+#set_io clk C8 
+set_io o_led B5 
+set_io i_sw B3
